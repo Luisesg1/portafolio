@@ -9,6 +9,22 @@ export const dict = {
   es: {
     lang: { label: 'ES', switchTo: 'EN', name: 'Español' },
     cursor: { view: 'VER PROYECTO →', explore: 'EXPLORAR →', exploreApp: 'VER APP ↗' },
+    cmd: {
+      placeholder: 'Buscar sección o acción…',
+      empty: 'Sin resultados',
+      navGroup: 'Ir a',
+      actionGroup: 'Acciones',
+      home: 'Inicio',
+      downloadCv: 'Descargar CV',
+      copyEmail: 'Copiar email',
+      copied: '¡Copiado!',
+      toEn: 'Switch to English',
+      toEs: 'Cambiar a Español',
+      tito: 'Invocar a Tito',
+      message: 'Enviar mensaje',
+      footMove: 'navegar',
+      footRun: 'abrir',
+    },
     nav: {
       work: 'Trabajo',
       services: 'Servicios',
@@ -248,6 +264,22 @@ export const dict = {
 
   en: {
     lang: { label: 'EN', switchTo: 'ES', name: 'English' },
+    cmd: {
+      placeholder: 'Search section or action…',
+      empty: 'No results',
+      navGroup: 'Go to',
+      actionGroup: 'Actions',
+      home: 'Home',
+      downloadCv: 'Download CV',
+      copyEmail: 'Copy email',
+      copied: 'Copied!',
+      toEn: 'Switch to English',
+      toEs: 'Switch to Spanish',
+      tito: 'Summon Tito',
+      message: 'Send a message',
+      footMove: 'navigate',
+      footRun: 'open',
+    },
     cursor: { view: 'VIEW PROJECT →', explore: 'EXPLORE →', exploreApp: 'EXPLORE APP ↗' },
     nav: {
       work: 'Work',

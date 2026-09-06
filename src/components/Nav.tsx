@@ -128,6 +128,16 @@ export function Nav() {
           </nav>
 
           <button
+            className="nav__cmdk"
+            onClick={() => window.dispatchEvent(new Event('cmdk:open'))}
+            data-cursor="link"
+            aria-label={t.nav.menu}
+            title="⌘K"
+          >
+            <span className="nav__cmdk-key">⌘</span>K
+          </button>
+
+          <button
             className="nav__lang"
             onClick={toggleLang}
             data-cursor="link"
@@ -181,6 +191,12 @@ export function Nav() {
             ))}
           </nav>
           <div className="mobilemenu__foot">
+            <button
+              className="nav__cmdk nav__cmdk--mobile"
+              onClick={() => { setOpen(false); window.dispatchEvent(new Event('cmdk:open')) }}
+            >
+              <span className="nav__cmdk-key">⌘</span>K
+            </button>
             <button className="nav__lang nav__lang--mobile" onClick={toggleLang} data-cursor="link">
               <span className={lang === 'es' ? 'is-on' : ''}>ES</span>
               <span className="nav__langsep">/</span>

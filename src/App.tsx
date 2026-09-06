@@ -12,6 +12,7 @@ import { Contact } from './components/Contact'
 import { GlobalCat } from './components/GlobalCat'
 import { Footer } from './components/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
+import { CommandPalette } from './components/CommandPalette'
 import { Loader } from './components/Loader'
 import { Hud } from './components/Hud'
 import './styles/sections.css'
@@ -40,6 +41,7 @@ export default function App() {
       </main>
       <Footer />
       <Hud />
+      <CommandPalette />
       <GlobalCat />
     </>
   )
