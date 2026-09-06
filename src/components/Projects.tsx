@@ -1,11 +1,14 @@
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from 'motion/react'
 import { Github } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { lazy, Suspense, useRef, useState } from 'react'
 import { Reveal, MaskLine } from './Reveal'
 import { OutlineText } from './OutlineText'
 import { projects } from '../data/content'
-import { CaseStudy } from './CaseStudy'
 import { useT } from '../i18n/i18n'
+
+// The case-study modal (with the phone showcase + image viewer) is heavy and
+// only opens on click — load its chunk on demand to keep the initial bundle lean.
+const CaseStudy = lazy(() => import('./CaseStudy').then((m) => ({ default: m.CaseStudy })))
 
 // Display order (indices into `projects`) — lead with the shipped, in-production
 // flagship. Data arrays stay in their canonical order so dict copy stays aligned
@@ -238,13 +241,15 @@ export function Projects() {
       </div>
 
       {active !== null && (
-        <CaseStudy
-          project={projects[active]}
-          text={t.projects.items[active]}
-          num={displayNum(active)}
-          labels={t.projects}
-          onClose={() => setActive(null)}
-        />
+        <Suspense fallback={null}>
+          <CaseStudy
+            project={projects[active]}
+            text={t.projects.items[active]}
+            num={displayNum(active)}
+            labels={t.projects}
+            onClose={() => setActive(null)}
+          />
+        </Suspense>
       )}
     </section>
   )

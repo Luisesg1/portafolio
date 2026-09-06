@@ -50,7 +50,15 @@ export function ParticleField({ className, density = 1, interactive = true }: Pr
     // and fewer particles, which keeps phones from janking (mobile GPUs choke on
     // a dpr-2 canvas full of shadow-blurred specks).
     const touch = window.matchMedia('(pointer: coarse)').matches
-    const cheap = !interactive || touch
+    // Respect data-saver + low-memory devices: fewer specks, no dpr-2 backing
+    // store, and (for save-data) a single static frame instead of a rAF loop.
+    const nav = navigator as Navigator & {
+      connection?: { saveData?: boolean }
+      deviceMemory?: number
+    }
+    const saveData = !!nav.connection?.saveData
+    const lowPower = saveData || (nav.deviceMemory ?? 8) <= 4
+    const cheap = !interactive || touch || lowPower
     const dpr = Math.min(window.devicePixelRatio || 1, cheap ? 1 : 2)
 
     let w = 0
@@ -300,7 +308,8 @@ export function ParticleField({ className, density = 1, interactive = true }: Pr
 
     resize()
 
-    if (reduce) {
+    // Reduced-motion and data-saver users get a single painted frame, no loop.
+    if (reduce || saveData) {
       frame(0)
       return () => {}
     }
