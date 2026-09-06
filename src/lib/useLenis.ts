@@ -45,26 +45,30 @@ export function useLenis() {
     }
     document.addEventListener('click', onClick)
 
-    // Focusing a form field makes the browser scroll it into view natively,
-    // which desyncs Lenis's internal position — on its next frame Lenis snaps
-    // the page back to its stale target (looked like the page "going black" /
-    // jumping to the footer when clicking an input). After the native focus
-    // scroll settles, lock Lenis to the real position so it can't yank.
+    // Focusing a form field makes the browser natively scroll it into view,
+    // which Lenis doesn't track — so on its next frame Lenis animates the page
+    // back toward its (now stale) target, yanking to the top/footer and making
+    // it impossible to type. Fix: pause Lenis while a form control is focused
+    // (native scroll/typing keep working), and resync + resume on blur.
+    const isField = (el: EventTarget | null) =>
+      el instanceof HTMLElement && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)
     const onFocusIn = (e: FocusEvent) => {
-      const t = e.target as HTMLElement | null
-      if (!lenis || !t) return
-      if (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) {
-        requestAnimationFrame(() =>
-          lenis!.scrollTo(window.scrollY, { immediate: true, force: true }),
-        )
-      }
+      if (lenis && isField(e.target)) lenis.stop()
+    }
+    const onFocusOut = (e: FocusEvent) => {
+      if (!lenis || !isField(e.target)) return
+      // adopt the real scroll position, then resume smoothing
+      lenis.scrollTo(window.scrollY, { immediate: true, force: true })
+      lenis.start()
     }
     document.addEventListener('focusin', onFocusIn)
+    document.addEventListener('focusout', onFocusOut)
 
     return () => {
       if (raf) cancelAnimationFrame(raf)
       document.removeEventListener('click', onClick)
       document.removeEventListener('focusin', onFocusIn)
+      document.removeEventListener('focusout', onFocusOut)
       lenis?.destroy()
       ;(window as unknown as { lenis?: Lenis | null }).lenis = null
     }
