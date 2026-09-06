@@ -259,9 +259,9 @@ export function Contact() {
               data-cursor="link"
             >
               <span className="contact__cv-label">{t.contact.cv}</span>
-              <span className="contact__cv-arrow" aria-hidden>↓</span>
-              <span className="meta contact__cv-meta">{t.contact.cvMeta}</span>
+              <span className="contact__cv-arrow" aria-hidden>→</span>
             </a>
+            <span className="meta contact__cv-note" aria-hidden>{t.contact.cvMeta}</span>
           </Reveal>
           <Reveal delay={0.16} className="contact__availtag">
             <span className="contact__availdot" />

@@ -31,9 +31,20 @@
   border-color: var(--violet);
   background: rgba(128, 82, 255, 0.08);
 }
+.contact__cv-label { white-space: nowrap; }
 .contact__cv-arrow { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
-.contact__cv:hover .contact__cv-arrow { transform: translateY(3px); color: var(--violet); }
-.contact__cv-meta { color: var(--ink-45); padding-left: 4px; }
+.contact__cv:hover .contact__cv-arrow,
+.contact__cv:focus-visible .contact__cv-arrow { transform: translateX(4px); color: var(--violet); }
+/* discreet meta, outside the button */
+.contact__cv-note {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink-45);
+  letter-spacing: 0.08em;
+}
+@media (max-width: 380px) {
+  .contact__cv { font-size: 12px; letter-spacing: 0.06em; padding: 0.8em 1.1em; max-width: 100%; }
+}
 .contact__sign-name {
   font-weight: 500;
   font-size: 16px;

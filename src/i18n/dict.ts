@@ -201,7 +201,7 @@ export const dict = {
       lead: '¿Tienes una idea? Hablemos y hagámosla realidad.',
       available: 'DISPONIBLE PARA PROYECTOS SELECTOS',
       whatsapp: 'Enviar mensaje',
-      cv: 'Descargar CV',
+      cv: 'Descargar currículum',
       cvMeta: 'PDF · 2026',
       form: {
         name: 'Nombre',
@@ -441,7 +441,7 @@ export const dict = {
       lead: 'Got an idea? Let’s talk and make it real.',
       available: 'AVAILABLE FOR SELECT PROJECTS',
       whatsapp: 'Send a message',
-      cv: 'Download CV',
+      cv: 'Download résumé',
       cvMeta: 'PDF · 2026',
       form: {
         name: 'Name',
