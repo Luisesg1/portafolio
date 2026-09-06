@@ -35,12 +35,13 @@
 .contact__cv-arrow { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
 .contact__cv:hover .contact__cv-arrow,
 .contact__cv:focus-visible .contact__cv-arrow { transform: translateY(3px); color: var(--violet); }
-/* discreet meta, outside the button */
+/* button + its discreet caption, coupled so the caption hugs the button
+   (independent of the lead column's larger gap) */
+.contact__cvwrap { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .contact__cv-note {
-  display: block;
-  margin-top: 8px;
   color: var(--ink-45);
   letter-spacing: 0.08em;
+  padding-left: 2px;
 }
 @media (max-width: 380px) {
   .contact__cv { font-size: 12px; letter-spacing: 0.06em; padding: 0.8em 1.1em; max-width: 100%; }
