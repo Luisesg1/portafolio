@@ -242,6 +242,11 @@
   display: flex;
   flex-direction: column;
   gap: 1px;
+  /* Outer frame + 1px gap-lines. The container's own border-bottom sat under
+     the last row's composited (reveal) background and read as "open", so the
+     bottom line is drawn explicitly on the last .chan below instead. */
+  background: var(--ink-20);
+  border: 1px solid var(--ink-20);
 }
 .contact__body .contact__channels > * { display: block; }
 .contact__body .chan {
@@ -251,6 +256,8 @@
   justify-content: center;
   gap: 7px;
 }
+/* explicit closing line under the final channel (see note above) */
+.contact__body .chan:last-child { box-shadow: 0 1px 0 0 var(--ink-20); }
 /* center the icon+label+value group vertically (drop the top-push) */
 .contact__body .chan__icon { margin-bottom: 0; }
 

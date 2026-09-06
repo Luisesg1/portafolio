@@ -78,10 +78,18 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  scroll-behavior: auto;
+  /* Native smooth in-page scroll — replaces the removed Lenis/JS anchor
+     hijack, which desynced from the real scroll position and stole focus
+     from the contact form. Reduced-motion forces this back to auto below. */
+  scroll-behavior: smooth;
   overflow-x: hidden;
   scrollbar-color: var(--ink-20) transparent;
   scrollbar-width: thin;
+}
+
+/* Anchor targets clear the fixed nav bar instead of hiding under it. */
+:where(section[id], main[id]) {
+  scroll-margin-top: clamp(72px, 8vw, 96px);
 }
 
 /* Custom scrollbar (WebKit/Blink) */

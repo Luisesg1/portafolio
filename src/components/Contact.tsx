@@ -276,24 +276,26 @@ export function Contact() {
             <ContactForm />
           </Reveal>
 
-          <div className="contact__channels">
-            {channels.map((c, i) => (
-              <Reveal key={c.label} delay={i * 0.06}>
-                <a
-                  href={c.href}
-                  target={c.href.startsWith('http') ? '_blank' : undefined}
-                  rel="noreferrer"
-                  className="chan"
-                  data-cursor="link"
-                >
-                  <c.icon size={18} strokeWidth={1.6} className="chan__icon" />
-                  <span className="chan__label meta">{c.label}</span>
-                  <span className="chan__value">{c.value}</span>
-                  <span className="chan__arrow" aria-hidden>↗</span>
-                </a>
-              </Reveal>
+          {/* One Reveal wraps the whole framed box — revealing each channel
+              individually let the last row's transform (+ will-change layer)
+              escape the box, leaving the bottom border open. */}
+          <Reveal className="contact__channels" as="div">
+            {channels.map((c) => (
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith('http') ? '_blank' : undefined}
+                rel="noreferrer"
+                className="chan"
+                data-cursor="link"
+              >
+                <c.icon size={18} strokeWidth={1.6} className="chan__icon" />
+                <span className="chan__label meta">{c.label}</span>
+                <span className="chan__value">{c.value}</span>
+                <span className="chan__arrow" aria-hidden>↗</span>
+              </a>
             ))}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,4 +1,3 @@
-import { useLenis } from './lib/useLenis'
 import { Nav } from './components/Nav'
 import { Hero } from './components/Hero'
 import { Intro } from './components/Intro'
@@ -12,15 +11,12 @@ import { Process } from './components/Process'
 import { Contact } from './components/Contact'
 import { GlobalCat } from './components/GlobalCat'
 import { Footer } from './components/Footer'
-import { Cursor } from './components/Cursor'
 import { ScrollProgress } from './components/ScrollProgress'
 import { Loader } from './components/Loader'
 import { Hud } from './components/Hud'
 import './styles/sections.css'
 
 export default function App() {
-  useLenis()
-
   return (
     <>
       <a href="#main" className="skip-link">Saltar al contenido</a>
@@ -29,7 +25,6 @@ export default function App() {
       <div className="page-stars" aria-hidden />
       <Loader />
       <ScrollProgress />
-      <Cursor />
       <Nav />
       <main id="main">
         <Hero />
