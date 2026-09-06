@@ -79,11 +79,11 @@ export function ParticleField({ className, density = 1, interactive = true }: Pr
         cap = 350
         floor = 160
       } else if (w < 1200) {
-        cap = 700
-        floor = 360
+        cap = 560
+        floor = 320
       } else {
-        cap = 1200
-        floor = 560
+        cap = 820
+        floor = 420
       }
       if (cores <= 4) {
         cap = Math.round(cap * 0.6)
@@ -270,22 +270,16 @@ export function ParticleField({ className, density = 1, interactive = true }: Pr
 
         const alpha = Math.min(1, p.baseA + tw * 0.5)
 
-        if (p.accent) {
-          ctx!.shadowColor = p.accent
-          ctx!.shadowBlur = 6 + tw * 6
-          ctx!.fillStyle = p.accent
-        } else {
-          ctx!.shadowBlur = tw > 0 ? 4 * tw : 0
-          ctx!.shadowColor = '#ffffff'
-          ctx!.fillStyle = '#eef0f6'
-        }
+        // NOTE: no canvas shadowBlur — it's the single most expensive op here
+        // (set + drawn per dot, per frame). Accents keep their colour; the
+        // twinkle now reads through alpha + a touch of size instead of a halo.
+        ctx!.fillStyle = p.accent ? p.accent : '#eef0f6'
         ctx!.globalAlpha = alpha
         ctx!.beginPath()
         ctx!.arc(px[i], py[i], p.size + tw * 0.6, 0, Math.PI * 2)
         ctx!.fill()
       }
       ctx!.globalAlpha = 1
-      ctx!.shadowBlur = 0
     }
 
     let raf = 0

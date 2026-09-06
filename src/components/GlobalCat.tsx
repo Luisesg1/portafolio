@@ -204,7 +204,9 @@ export function GlobalCat() {
     }
 
     function start() {
-      if (running || !loaded) return
+      // never run (or spawn hearts) while Tito is hidden — a pointer move/scroll
+      // must not resurrect the loop behind the hidden canvas.
+      if (running || !loaded || isHidden()) return
       running = true
       last = performance.now()
       raf = requestAnimationFrame(tick)
