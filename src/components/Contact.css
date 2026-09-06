@@ -248,13 +248,12 @@
   background: var(--ink-20);
   border: 1px solid var(--ink-20);
 }
-.contact__body .contact__channels > * { display: block; }
 .contact__body .chan {
   width: 100%;
   min-height: 0;
-  padding: clamp(16px, 1.9vw, 22px) clamp(18px, 2vw, 28px);
+  padding: clamp(18px, 2.1vw, 24px) clamp(18px, 2vw, 28px);
   justify-content: center;
-  gap: 7px;
+  gap: 9px;
 }
 /* explicit closing line under the final channel (see note above) */
 .contact__body .chan:last-child { box-shadow: 0 1px 0 0 var(--ink-20); }
@@ -269,7 +268,6 @@
     grid-template-columns: 1fr 1fr;
     height: auto;
   }
-  .contact__body .contact__channels > * { display: block; flex: none; }
   .contact__body .chan { min-height: 120px; }
 }
 @media (max-width: 560px) {
