@@ -45,9 +45,26 @@ export function useLenis() {
     }
     document.addEventListener('click', onClick)
 
+    // Focusing a form field makes the browser scroll it into view natively,
+    // which desyncs Lenis's internal position — on its next frame Lenis snaps
+    // the page back to its stale target (looked like the page "going black" /
+    // jumping to the footer when clicking an input). After the native focus
+    // scroll settles, lock Lenis to the real position so it can't yank.
+    const onFocusIn = (e: FocusEvent) => {
+      const t = e.target as HTMLElement | null
+      if (!lenis || !t) return
+      if (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) {
+        requestAnimationFrame(() =>
+          lenis!.scrollTo(window.scrollY, { immediate: true, force: true }),
+        )
+      }
+    }
+    document.addEventListener('focusin', onFocusIn)
+
     return () => {
       if (raf) cancelAnimationFrame(raf)
       document.removeEventListener('click', onClick)
+      document.removeEventListener('focusin', onFocusIn)
       lenis?.destroy()
       ;(window as unknown as { lenis?: Lenis | null }).lenis = null
     }
