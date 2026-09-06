@@ -34,7 +34,7 @@
 .contact__cv-label { white-space: nowrap; }
 .contact__cv-arrow { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
 .contact__cv:hover .contact__cv-arrow,
-.contact__cv:focus-visible .contact__cv-arrow { transform: translateX(4px); color: var(--violet); }
+.contact__cv:focus-visible .contact__cv-arrow { transform: translateY(3px); color: var(--violet); }
 /* discreet meta, outside the button */
 .contact__cv-note {
   display: block;
