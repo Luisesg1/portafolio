@@ -7,7 +7,6 @@
   gap: 24px;
   flex-wrap: wrap;
   padding-bottom: clamp(32px, 4vw, 56px);
-  border-bottom: 1px solid var(--ink-20);
 }
 .contact__leadwrap { display: flex; flex-direction: column; gap: 20px; }
 .contact__lead { max-width: 460px; }
