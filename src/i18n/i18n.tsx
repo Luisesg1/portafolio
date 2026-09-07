@@ -33,8 +33,22 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Keep the document metadata in sync with the active language so shares and
+  // search snippets match what the visitor sees (client-side i18n, single URL).
   useEffect(() => {
     document.documentElement.lang = lang
+    const seo = dict[lang].seo
+    document.title = seo.title
+    const set = (sel: string, attr: string, val: string) => {
+      const el = document.head.querySelector(sel)
+      if (el) el.setAttribute(attr, val)
+    }
+    set('meta[name="description"]', 'content', seo.description)
+    set('meta[property="og:title"]', 'content', seo.title)
+    set('meta[property="og:description"]', 'content', seo.description)
+    set('meta[property="og:locale"]', 'content', seo.locale)
+    set('meta[name="twitter:title"]', 'content', seo.title)
+    set('meta[name="twitter:description"]', 'content', seo.description)
   }, [lang])
 
   return (

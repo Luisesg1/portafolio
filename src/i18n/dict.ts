@@ -8,6 +8,12 @@
 export const dict = {
   es: {
     lang: { label: 'ES', switchTo: 'EN', name: 'Español' },
+    seo: {
+      title: 'Luis Eduardo Soto Gutiérrez — Desarrollador Full Stack e Ingeniero en Informática',
+      description:
+        'Desarrollador full stack e Ingeniero en Informática en Chile. Desarrollo aplicaciones web, sistemas de gestión y soluciones digitales a medida — de la idea a producción.',
+      locale: 'es_CL',
+    },
     cursor: { view: 'VER PROYECTO →', explore: 'EXPLORAR →', exploreApp: 'VER APP ↗' },
     cmd: {
       placeholder: 'Buscar sección o acción…',
@@ -265,6 +271,12 @@ export const dict = {
 
   en: {
     lang: { label: 'EN', switchTo: 'ES', name: 'English' },
+    seo: {
+      title: 'Luis Eduardo Soto Gutiérrez — Full Stack Developer & Software Engineer',
+      description:
+        'Full stack developer and Software Engineer based in Chile. I build web apps, management systems and custom digital solutions — from idea to production.',
+      locale: 'en_US',
+    },
     cmd: {
       placeholder: 'Search section or action…',
       empty: 'No results',
