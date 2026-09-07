@@ -150,6 +150,13 @@
 /* subtle focus glow */
 .cform__input:focus { border-bottom-color: transparent; }
 
+/* The field's own focus cue is the animated underline + floating label, so drop
+   the generic boxy focus-visible ring that looked cramped around the input. */
+.cform__input:focus-visible,
+.cform__textarea:focus-visible {
+  outline: none;
+}
+
 .cform__field.has-error .cform__input { border-bottom-color: var(--magenta); }
 .cform__err {
   position: absolute;
