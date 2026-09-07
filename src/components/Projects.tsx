@@ -178,7 +178,9 @@ export function Projects() {
                   {p.wip ? (
                     <span className="pj__wip">{t.projects.wip}</span>
                   ) : (
-                    <span className="pj__wip pj__wip--live">{t.projects.live}</span>
+                    <span className="pj__wip pj__wip--live">
+                      {'client' in p && p.client ? t.projects.clientReal : t.projects.live}
+                    </span>
                   )}
                 </Reveal>
 

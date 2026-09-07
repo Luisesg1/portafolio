@@ -31,9 +31,9 @@ export const services = [
   },
   {
     n: '06',
-    title: 'UI / UX',
-    desc: 'Interfaces modernas y experiencias de usuario centradas en el producto.',
-    tags: ['Design', 'Motion', 'System'],
+    title: 'Backend & Data',
+    desc: 'APIs, lógica de negocio y modelos de datos, con autenticación y roles.',
+    tags: ['PostgreSQL', 'Auth', 'Roles'],
   },
 ] as const
 
@@ -176,6 +176,7 @@ export const projects = [
       '/projects/cotiza-5.webp',
     ] as string[],
     wip: false,
+    client: true,
     device: 'browser' as 'phone' | 'browser',
     screens: ['Dashboard', 'Historial', 'Clientes', 'Nueva Cotización', 'Configuración'] as string[],
   },
