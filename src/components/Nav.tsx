@@ -17,18 +17,17 @@ export function Nav() {
   const lastY = useRef(0)
 
   const LINKS = [
-    { id: 'work', label: t.nav.work },
     { id: 'services', label: t.nav.services },
+    { id: 'work', label: t.nav.work },
     { id: 'about', label: t.nav.about },
     { id: 'contact', label: t.nav.contact },
   ]
 
   // mobile menu lists more sections (there's room) — page-flow order
   const MOBILE_LINKS = [
-    { id: 'work', label: t.nav.work },
     { id: 'services', label: t.nav.services },
+    { id: 'work', label: t.nav.work },
     { id: 'tech', label: t.nav.tech },
-    { id: 'system', label: t.nav.system },
     { id: 'about', label: t.nav.about },
     { id: 'process', label: t.nav.process },
     { id: 'contact', label: t.nav.contact },

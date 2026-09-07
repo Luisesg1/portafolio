@@ -4,9 +4,7 @@ import { Intro } from './components/Intro'
 import { Services } from './components/Services'
 import { Projects } from './components/Projects'
 import { Tech } from './components/Tech'
-import { System } from './components/System'
 import { Profile } from './components/Profile'
-import { Approach } from './components/Approach'
 import { Process } from './components/Process'
 import { Contact } from './components/Contact'
 import { GlobalCat } from './components/GlobalCat'
@@ -33,9 +31,7 @@ export default function App() {
         <Services />
         <Projects />
         <Tech />
-        <System />
         <Profile />
-        <Approach />
         <Process />
         <Contact />
       </main>
