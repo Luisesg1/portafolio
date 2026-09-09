@@ -258,7 +258,7 @@ export const dict = {
       copied: '¡Copiado!',
       summonTito: 'Invocar a Tito',
       surprise: 'Sorpréndeme',
-      surpriseHint: '¿Te animás? Toca el botón ↓',
+      surpriseHint: '¿Te animas? Toca el botón ↓',
       cats: 'Hecho con código y gatos',
       catExe: 'CAT.EXE',
       catExeStatus: 'STATUS: VIGILANDO TU CÓDIGO…',
