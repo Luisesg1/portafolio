@@ -322,8 +322,9 @@ export function Footer() {
         {/* ---- thanks + copy email ---- */}
         <Reveal className="footer__thanks" delay={0.05}>
           <span className="footer__thanks-txt">{t.footer.thanks}</span>
+          <span className="footer__surprise-hint">{t.footer.surpriseHint}</span>
           <div className="footer__thanks-actions">
-            <button className="footer__act" onClick={surprise} data-cursor="link">
+            <button className="footer__act footer__act--surprise" onClick={surprise} data-cursor="link">
               <Sparkles size={15} strokeWidth={1.7} />
               {t.footer.surprise}
             </button>
