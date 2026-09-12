@@ -4,6 +4,7 @@ import { Reveal, MaskLine } from './Reveal'
 import { Magnetic } from './Magnetic'
 import { FooterWordmark } from './FooterWordmark'
 import { useT } from '../i18n/i18n'
+import { scrollToY } from '../lib/scroll'
 import './Footer.css'
 
 /* ---- random "surprise me" effects (cosmos palette, no emoji) ---- */
@@ -232,13 +233,8 @@ function fxBlackHole() {
   cat.addEventListener('animationend', () => cat.remove())
   window.setTimeout(() => cat.remove(), 2000)
   // when the screen is fully black, jump back to the top so it "restarts"
-  window.setTimeout(() => {
-    try {
-      window.scrollTo({ top: 0, behavior: 'auto' })
-    } catch {
-      window.scrollTo(0, 0)
-    }
-  }, 1450)
+  // (scrollToY forces `auto`; a plain scrollTo no-ops under the global smooth)
+  window.setTimeout(() => scrollToY(0), 1450)
   // as the darkness clears, Tito re-emerges near the top
   window.setTimeout(() => {
     window.dispatchEvent(new CustomEvent('tito:show', { detail: { top: true } }))

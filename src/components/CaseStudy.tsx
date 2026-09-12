@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { X, Github, Maximize2 } from 'lucide-react'
 import type { projects } from '../data/content'
 import type { dict } from '../i18n/dict'
+import { scrollToId } from '../lib/scroll'
 import { PhoneShowcase } from './PhoneShowcase'
 import { ProjectViewer } from './ProjectViewer'
 import './CaseStudy.css'
@@ -169,6 +170,15 @@ export function CaseStudy({
     setTimeout(onClose, 420)
   }
 
+  // The modal locks body scroll while open, so a native `#contact` jump on click
+  // fires while scrolling is blocked and never lands. Close first, then — once
+  // the dialog has unmounted and overflow is restored — jump to the section.
+  const goContact = (e: React.MouseEvent) => {
+    e.preventDefault()
+    close()
+    window.setTimeout(() => scrollToId('contact'), 460)
+  }
+
   useEffect(() => {
     const prevFocus = document.activeElement as HTMLElement | null
     const panel = panelRef.current
@@ -201,7 +211,7 @@ export function CaseStudy({
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
-      prevFocus?.focus?.()
+      prevFocus?.focus?.({ preventScroll: true })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -232,9 +242,9 @@ export function CaseStudy({
   }, [])
 
   const blocks = [
-    { n: '01', k: labels.blocks.problem, v: text.problem },
+    { n: '01', k: labels.blocks.context, v: text.problem },
     { n: '02', k: labels.blocks.solution, v: text.solution },
-    { n: '03', k: labels.blocks.result, v: text.result },
+    { n: '03', k: labels.blocks.implementation, v: text.implementation },
   ]
 
   return (
@@ -342,8 +352,24 @@ export function CaseStudy({
                 </div>
               </section>
             ))}
-            <section className="cs__chapter cs__chapter--stack" data-reveal>
+
+            <section className="cs__chapter cs__chapter--feats" data-reveal>
               <span className="cs__chapter-n" aria-hidden>04</span>
+              <div className="cs__chapter-body">
+                <span className="meta cs__chapter-k">{labels.blocks.features}</span>
+                <ul className="cs__feats">
+                  {text.features.map((f, i) => (
+                    <li key={f} className="cs__feat" style={{ '--i': i } as React.CSSProperties}>
+                      <span className="cs__feat-b" aria-hidden />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            <section className="cs__chapter cs__chapter--stack" data-reveal>
+              <span className="cs__chapter-n" aria-hidden>05</span>
               <div className="cs__chapter-body">
                 <span className="meta cs__chapter-k">{labels.facts.stack}</span>
                 <ul className="cs__stackrow">
@@ -356,24 +382,39 @@ export function CaseStudy({
                 </ul>
               </div>
             </section>
+
+            <section className="cs__chapter" data-reveal>
+              <span className="cs__chapter-n" aria-hidden>06</span>
+              <div className="cs__chapter-body">
+                <span className="meta cs__chapter-k">{labels.blocks.learnings}</span>
+                <p className="cs__chapter-v">{text.learnings}</p>
+              </div>
+            </section>
+
+            <section className="cs__chapter cs__chapter--evid" data-reveal>
+              <span className="cs__chapter-n" aria-hidden>07</span>
+              <div className="cs__chapter-body">
+                <span className="meta cs__chapter-k">{labels.blocks.evidence}</span>
+                <p className="cs__chapter-v">{labels.evidenceShots}</p>
+                {project.repo && (
+                  <div className="cs__links">
+                    <a
+                      className="cs__link"
+                      href={project.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cursor="link"
+                    >
+                      <Github size={16} strokeWidth={1.6} aria-hidden />
+                      {labels.viewRepo}
+                    </a>
+                  </div>
+                )}
+              </div>
+            </section>
           </div>
 
-          {project.repo && (
-            <div className="cs__links">
-              <a
-                className="cs__link"
-                href={project.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cursor="link"
-              >
-                <Github size={16} strokeWidth={1.6} aria-hidden />
-                {labels.viewRepo}
-              </a>
-            </div>
-          )}
-
-          <a href="#contact" className="cs__cta" onClick={close} data-cursor="link">
+          <a href="#contact" className="cs__cta" onClick={goContact} data-cursor="link">
             {labels.caseCta} <span aria-hidden>→</span>
           </a>
         </div>

@@ -53,9 +53,8 @@ export const projects = [
     solution:
       'Una app móvil Android que centraliza todas las variables de costeo y calcula precio y margen al instante, con parámetros reutilizables y una interfaz clara pensada para uso diario.',
     result:
-      'Reemplazó el cálculo manual por un flujo consistente y repetible, reduciendo errores de cotización y acelerando la entrega de precios a clientes.',
+      'Reemplaza el cálculo manual por un flujo consistente y repetible: menos margen de error y precios listos al instante a partir de parámetros reutilizables.',
     repo: '' as string,
-    demo: '' as string,
     images: [
       '/projects/calc3d-1.webp',
       '/projects/calc3d-2.webp',
@@ -83,7 +82,6 @@ export const projects = [
     result:
       'Unificó la operación en un solo sistema con control de acceso por rol, dando estructura y trazabilidad a procesos que antes eran manuales.',
     repo: '' as string,
-    demo: 'https://claude.ai/code/artifact/53966726-c2c9-4889-8d3c-8b1acf33dbe1' as string,
     images: [
       '/projects/gestion-1.webp',
       '/projects/gestion-2.webp',
@@ -111,7 +109,6 @@ export const projects = [
     result:
       'Proyecto de investigación aplicada que explora cómo la tecnología puede asistir el diagnóstico agrícola de forma más rápida y objetiva.',
     repo: '' as string,
-    demo: 'https://defca.app' as string,
     images: [
       '/projects/defca-1.webp',
       '/projects/defca-2.webp',
@@ -138,7 +135,6 @@ export const projects = [
     result:
       'Convierte el registro de entrenamientos en datos accionables —PRs, insights y recomendaciones— con una capa de gamificación que mantiene al usuario volviendo.',
     repo: '' as string,
-    demo: '' as string,
     images: [
       '/projects/beast-1.webp',
       '/projects/beast-5.webp',
@@ -161,13 +157,12 @@ export const projects = [
     role: 'Full Stack Developer',
     stack: ['React 18', 'TypeScript', 'TailwindCSS', 'Supabase', 'PostgreSQL', 'jsPDF'],
     problem:
-      'Una empresa regional generaba cotizaciones a mano en Word/Excel, sin numeración consistente, sin registro histórico ni control de clientes: un proceso lento y propenso a errores.',
+      'Generar cotizaciones a mano en Word/Excel —sin numeración consistente, sin registro histórico ni control de clientes— es un proceso lento y propenso a errores.',
     solution:
       'App web de gestión de cotizaciones: CRUD de clientes, cálculo automático de subtotal/IVA/total, numeración diaria (AAMMDD-N), PDF profesional de una página con firma digital y datos bancarios, historial con búsqueda y duplicado, y configuración de la empresa. Autenticación con recuperación de contraseña.',
     result:
-      'Sistema en producción usado por el cliente: cotizaciones generadas en segundos con formato consistente, respaldo centralizado en la nube y PDF listo para enviar. Incluye modo demo sin backend.',
+      'Sistema completo de punta a punta: genera cotizaciones en segundos con formato consistente, respaldo centralizado en la nube y PDF listo para enviar. Incluye modo demo sin backend.',
     repo: '' as string,
-    demo: '' as string,
     images: [
       '/projects/cotiza-1.webp',
       '/projects/cotiza-3.webp',
@@ -176,7 +171,6 @@ export const projects = [
       '/projects/cotiza-5.webp',
     ] as string[],
     wip: false,
-    client: true,
     device: 'browser' as 'phone' | 'browser',
     screens: ['Dashboard', 'Historial', 'Clientes', 'Nueva Cotización', 'Configuración'] as string[],
   },
@@ -184,7 +178,7 @@ export const projects = [
 
 /** Real, non-fabricated portfolio signals. No fake client counts or metrics. */
 export const metrics = [
-  { label: 'Projects Shipped', value: '05', sub: 'Real, built end-to-end' },
+  { label: 'Projects Built', value: '05', sub: 'Real, built end-to-end' },
   { label: 'Focus', value: 'FULL', sub: 'Stack — front to back' },
   { label: 'Since', value: '2026', sub: 'Ingeniería · INACAP' },
   { label: 'Mode', value: 'BUILD', sub: 'Create · Learn · Iterate' },
@@ -220,10 +214,21 @@ export const techMeta: Record<string, string> = {
   MySQL: 'Relational / Queries',
   PostgreSQL: 'Relational / Production',
   H2: 'In-memory / Testing',
+  Supabase: 'BaaS / Postgres',
   Git: 'Versioning / Workflow',
   GitHub: 'Collaboration / CI',
   Electron: 'Desktop / Cross-platform',
 }
+
+/** Technologies I reach for first — highlighted over the complementary ones. */
+export const coreTech = new Set([
+  'React',
+  'TypeScript',
+  'Python',
+  'Django',
+  'Kotlin',
+  'PostgreSQL',
+])
 
 export const projectTypes = [
   'Web Development',
@@ -240,7 +245,7 @@ export const stack = [
   },
   { group: 'Backend', items: ['Python', 'Django', 'Java', 'Spring Boot', 'REST API'] },
   { group: 'Mobile', items: ['Kotlin', 'Jetpack Compose', 'Android Studio'] },
-  { group: 'Database', items: ['MySQL', 'PostgreSQL', 'H2'] },
+  { group: 'Database', items: ['PostgreSQL', 'MySQL', 'Supabase', 'H2'] },
   { group: 'Tools', items: ['Git', 'GitHub', 'Electron'] },
 ] as const
 

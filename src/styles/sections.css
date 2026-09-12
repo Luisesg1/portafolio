@@ -550,6 +550,40 @@
   color: var(--ink);
   padding-left: 10px;
 }
+/* Core stack — the technologies I reach for first read at full strength and
+   carry a small accent dot; complementary tools stay dimmer. */
+.tech__item.is-core {
+  color: var(--ink);
+  font-weight: 600;
+}
+.tech__item.is-core .tech__itemname {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.tech__item.is-core .tech__itemname::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px -1px var(--violet);
+  flex: none;
+}
+.tech__legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--ink-45);
+}
+.tech__legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 10px -1px var(--violet);
+}
 .tech__itemmeta {
   font-family: var(--font-mono);
   font-size: 10px;

@@ -90,14 +90,18 @@ export function Nav() {
       lenis?.stop()
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overflow = 'hidden'
+      // hide floating overlays (e.g. Tito's summon chip) behind the full-screen menu
+      document.body.classList.add('menu-open')
     } else {
       document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
+      document.body.classList.remove('menu-open')
       lenis?.start()
     }
     return () => {
       document.documentElement.style.overflow = ''
       document.body.style.overflow = ''
+      document.body.classList.remove('menu-open')
       lenis?.start()
     }
   }, [open])

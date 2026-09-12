@@ -617,7 +617,44 @@
   max-width: 640px;
 }
 
-/* [04] STACK — editorial, not badges */
+/* [04] FEATURES — capability list, two columns on wide viewports */
+.cs__feats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 34px;
+  margin-top: 4px;
+}
+.cs__feat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.45;
+  color: var(--ink-70);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0, 1);
+  transition-delay: calc(var(--i, 0) * 60ms + 120ms);
+}
+.cs__chapter.is-in .cs__feat {
+  opacity: 1;
+  transform: none;
+}
+.cs__feat-b {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.5em;
+  border-radius: 50%;
+  background: var(--accent, var(--violet));
+  box-shadow: 0 0 10px -1px var(--accent, var(--violet));
+}
+@media (max-width: 560px) {
+  .cs__feats { grid-template-columns: 1fr; }
+}
+
+/* [05] STACK — editorial, not badges */
 .cs__stackrow {
   display: flex;
   flex-wrap: wrap;
@@ -659,6 +696,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cs__chapter,
+  .cs__feat,
   .cs__stackitem { opacity: 1; transform: none; transition: none; }
 }
 .cs__cta {

@@ -12,6 +12,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useI18n } from '../i18n/i18n'
+import { scrollToId } from '../lib/scroll'
 import './CommandPalette.css'
 
 const EMAIL = 'luiseduardosotoguti@gmail.com'
@@ -50,10 +51,9 @@ export function CommandPalette() {
 
   const go = (id: string) => {
     close()
-    // let the overlay unmount, then scroll natively (smooth via global CSS)
-    requestAnimationFrame(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    })
+    // Let the overlay unmount, then scroll. Programmatic scrolls no-op while the
+    // global `scroll-behavior: smooth` is active, so scrollToId forces `auto`.
+    setTimeout(() => scrollToId(id), 60)
   }
 
   const download = () => {

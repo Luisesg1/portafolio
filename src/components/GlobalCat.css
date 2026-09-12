@@ -54,6 +54,8 @@
   border-color: var(--violet);
   transform: translateY(-2px);
 }
+/* the full-screen mobile menu owns the viewport — keep Tito's chip out of it */
+body.menu-open .tito-summon { display: none; }
 .tito-summon svg {
   width: 20px;
   height: auto;

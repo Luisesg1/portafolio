@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Reveal, MaskLine } from './Reveal'
 import { Marquee } from './Marquee'
-import { stack, techMeta } from '../data/content'
+import { stack, techMeta, coreTech } from '../data/content'
 import { useT } from '../i18n/i18n'
 
 const marquee = ['React', 'TypeScript', 'Python', 'Django', 'PostgreSQL', 'Vite', 'Tailwind', 'Electron', 'REST API', 'Supabase']
@@ -48,6 +48,11 @@ export function Tech() {
               <span className="c-violet">{t.tech.t2}</span>
             </MaskLine>
           </h2>
+          <Reveal delay={0.1}>
+            <span className="tech__legend meta">
+              <i className="tech__legend-dot" aria-hidden /> {t.tech.core}
+            </span>
+          </Reveal>
         </div>
       </div>
 
@@ -68,7 +73,12 @@ export function Tech() {
               <span className="meta tech__gname">{t.tech.groups[g.group]}</span>
               <ul className="tech__items">
                 {g.items.map((it, i) => (
-                  <li key={it} className="tech__item" data-cursor="link" style={{ '--i': i } as React.CSSProperties}>
+                  <li
+                    key={it}
+                    className={`tech__item ${coreTech.has(it) ? 'is-core' : ''}`}
+                    data-cursor="link"
+                    style={{ '--i': i } as React.CSSProperties}
+                  >
                     <span className="tech__itemname">{it}</span>
                     {techMeta[it] && <span className="tech__itemmeta">{techMeta[it]}</span>}
                   </li>
