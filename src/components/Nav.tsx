@@ -200,6 +200,12 @@ export function Nav() {
             >
               <span className="nav__cmdk-key">⌘</span>K
             </button>
+            <button
+              className="nav__cmdk nav__cmdk--mobile nav__play"
+              onClick={() => { setOpen(false); window.dispatchEvent(new Event('game:open')) }}
+            >
+              🎮 {t.game.title}
+            </button>
             <button className="nav__lang nav__lang--mobile" onClick={toggleLang} data-cursor="link">
               <span className={lang === 'es' ? 'is-on' : ''}>ES</span>
               <span className="nav__langsep">/</span>

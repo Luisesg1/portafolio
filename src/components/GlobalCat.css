@@ -54,8 +54,12 @@
   border-color: var(--violet);
   transform: translateY(-2px);
 }
-/* the full-screen mobile menu owns the viewport — keep Tito's chip out of it */
-body.menu-open .tito-summon { display: none; }
+/* the full-screen mobile menu owns the viewport — keep Tito (and his chip)
+   from drawing over the menu items */
+body.menu-open .tito-summon,
+body.menu-open .globalcat,
+body.menu-open .globalcat-hint,
+body.menu-open .globalcat-heart { display: none; }
 .tito-summon svg {
   width: 20px;
   height: auto;
