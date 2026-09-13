@@ -6,11 +6,32 @@ import { Projects } from './components/Projects'
 import { Tech } from './components/Tech'
 import { Profile } from './components/Profile'
 import { Process } from './components/Process'
+import { GameBreak } from './components/GameBreak'
 import { Contact } from './components/Contact'
 import { GlobalCat } from './components/GlobalCat'
 import { Footer } from './components/Footer'
 import { ScrollProgress } from './components/ScrollProgress'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { CommandPalette } from './components/CommandPalette'
+
+// Easter-egg mini-game — heavy-ish and rarely opened, so it's split out of the
+// initial bundle and only fetched when the "game:open" event fires.
+const CatchGame = lazy(() => import('./components/CatchGame').then((m) => ({ default: m.CatchGame })))
+
+function GameHost() {
+  const [on, setOn] = useState(false)
+  useEffect(() => {
+    const open = () => setOn(true)
+    window.addEventListener('game:open', open)
+    return () => window.removeEventListener('game:open', open)
+  }, [])
+  if (!on) return null
+  return (
+    <Suspense fallback={null}>
+      <CatchGame onClose={() => setOn(false)} />
+    </Suspense>
+  )
+}
 import { Loader } from './components/Loader'
 import { Hud } from './components/Hud'
 import './styles/sections.css'
@@ -33,11 +54,13 @@ export default function App() {
         <Tech />
         <Profile />
         <Process />
+        <GameBreak />
         <Contact />
       </main>
       <Footer />
       <Hud />
       <CommandPalette />
+      <GameHost />
       <GlobalCat />
     </>
   )

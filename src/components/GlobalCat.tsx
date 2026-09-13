@@ -79,19 +79,29 @@ export function GlobalCat() {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const cw = DISP_W
     const ch = DISP_H
-    canvas.width = cw * dpr
-    canvas.height = ch * dpr
-    canvas.style.width = cw + 'px'
-    canvas.style.height = ch + 'px'
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    ctx.imageSmoothingEnabled = true
+    // Backing-store resolution tracks the *effective* device pixel ratio, which
+    // browser zoom changes — re-sync on resize so Tito never renders blurry when
+    // the page is zoomed in (a fixed-resolution canvas would pixelate).
+    let dpr = 0
+    const syncDPR = () => {
+      const d = Math.min(window.devicePixelRatio || 1, 3)
+      if (d === dpr) return
+      dpr = d
+      canvas.width = Math.round(cw * dpr)
+      canvas.height = Math.round(ch * dpr)
+      canvas.style.width = cw + 'px'
+      canvas.style.height = ch + 'px'
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx.imageSmoothingEnabled = true
+      drawFrame()
+    }
 
     const img = new Image()
     let sheet: HTMLCanvasElement | null = null
     let loaded = false
+    syncDPR() // size the canvas now that `sheet` exists (drawFrame no-ops until loaded)
 
     const docW = () => document.documentElement.clientWidth
     const docH = () => document.documentElement.scrollHeight
@@ -223,6 +233,7 @@ export function GlobalCat() {
       else start()
     }
     const onResize = () => {
+      syncDPR() // browser zoom changes the pixel ratio — keep Tito crisp
       x = Math.min(x, docW() - cw / 2)
       y = Math.min(y, docH() - 4)
     }
@@ -290,13 +301,6 @@ export function GlobalCat() {
 
     // one-time hint so people know Tito can be dismissed
     const HINT_KEY = 'tito-hint-seen'
-    const hintSeen = () => {
-      try {
-        return localStorage.getItem(HINT_KEY) === '1'
-      } catch {
-        return false
-      }
-    }
     const markHint = () => {
       try {
         localStorage.setItem(HINT_KEY, '1')
@@ -305,7 +309,8 @@ export function GlobalCat() {
       }
     }
     const showHint = () => {
-      if (hintSeen() || document.querySelector('.globalcat-hint')) return
+      // shown on every visit (no `hintSeen` gate) so newcomers always spot Tito
+      if (document.querySelector('.globalcat-hint')) return
       let lang = 'es'
       try {
         lang = localStorage.getItem('ls-lang') || 'es'
@@ -315,7 +320,7 @@ export function GlobalCat() {
       const es = lang !== 'en'
       const fine = window.matchMedia('(pointer: fine)').matches
       const verb = fine ? (es ? 'Clic en' : 'Click') : (es ? 'Toca a' : 'Tap')
-      const tail = es ? 'para ocultarlo' : 'to hide him'
+      const tail = es ? 'para jugar u ocultarlo' : 'to play or hide him'
       const h = document.createElement('div')
       h.className = 'globalcat-hint'
       h.innerHTML =
@@ -365,10 +370,17 @@ export function GlobalCat() {
       menu.style.left = Math.min(clientX, window.innerWidth - 200) + 'px'
       menu.style.top = Math.min(clientY, window.innerHeight - 90) + 'px'
       menu.innerHTML =
-        `<span class="globalcat-menu__q">${es ? '¿Ocultar a Tito?' : 'Hide Tito?'}</span>` +
-        `<button class="globalcat-menu__btn" type="button">${es ? 'Ocultar' : 'Hide'}</button>`
+        `<span class="globalcat-menu__q">Tito</span>` +
+        `<button class="globalcat-menu__btn globalcat-menu__btn--play" type="button" data-act="play">${
+          es ? '🎮 Atrapa a Tito' : '🎮 Catch Tito'
+        }</button>` +
+        `<button class="globalcat-menu__btn" type="button" data-act="hide">${es ? 'Ocultar' : 'Hide'}</button>`
       document.body.appendChild(menu)
-      menu.querySelector('button')!.addEventListener('click', () => {
+      menu.querySelector('[data-act="play"]')!.addEventListener('click', () => {
+        removeMenu()
+        window.dispatchEvent(new Event('game:open'))
+      })
+      menu.querySelector('[data-act="hide"]')!.addEventListener('click', () => {
         hideCat()
         removeMenu()
       })

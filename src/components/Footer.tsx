@@ -1,5 +1,5 @@
 import { useState, type MouseEvent } from 'react'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Gamepad2 } from 'lucide-react'
 import { Reveal, MaskLine } from './Reveal'
 import { Magnetic } from './Magnetic'
 import { FooterWordmark } from './FooterWordmark'
@@ -323,6 +323,14 @@ export function Footer() {
             <button className="footer__act footer__act--surprise" onClick={surprise} data-cursor="link">
               <Sparkles size={15} strokeWidth={1.7} />
               {t.footer.surprise}
+            </button>
+            <button
+              className="footer__act footer__act--play"
+              onClick={() => window.dispatchEvent(new Event('game:open'))}
+              data-cursor="link"
+            >
+              <Gamepad2 size={15} strokeWidth={1.7} />
+              {t.game.title}
             </button>
           </div>
         </Reveal>

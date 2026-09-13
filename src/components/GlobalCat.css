@@ -193,6 +193,11 @@ body.menu-open .tito-summon { display: none; }
   border-color: var(--violet);
   color: #fff;
 }
+/* the play action leads — tinted violet to stand out from "hide" */
+.globalcat-menu__btn--play {
+  border-color: color-mix(in srgb, var(--violet) 50%, transparent);
+  background: color-mix(in srgb, var(--violet) 12%, transparent);
+}
 
 @keyframes cat-heart {
   0% {
