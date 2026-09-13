@@ -636,6 +636,17 @@
   gap: 8px;
   align-items: stretch;
 }
+/* narrow modal (mobile): stack so the name field gets the full width and its
+   placeholder/counter are readable instead of being squeezed to "Tu nom" */
+@media (max-width: 480px) {
+  .cg__lbform {
+    flex-direction: column;
+  }
+  .cg__lbbtn {
+    width: 100%;
+    padding: 0.75em 1em;
+  }
+}
 .cg__lbfield {
   position: relative;
   flex: 1;
