@@ -411,7 +411,22 @@ export function CatchGame({ onClose }: { onClose: () => void }) {
           {phase === 'over' && (
             <div className="cg__overlay cg__overlay--over">
               <span className={`cg__medal ${isRecord ? 'is-record' : ''}`} aria-hidden>
-                {isRecord ? '🏆' : '🐾'}
+                <svg className="cg__trophy" viewBox="0 0 64 64">
+                  <defs>
+                    <linearGradient id="cgGold" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#ffe79a" />
+                      <stop offset="52%" stopColor="#ffc23c" />
+                      <stop offset="100%" stopColor="#e0891a" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M18 13 C7 13 7 30 21 32" fill="none" stroke="url(#cgGold)" strokeWidth="3.4" strokeLinecap="round" />
+                  <path d="M46 13 C57 13 57 30 43 32" fill="none" stroke="url(#cgGold)" strokeWidth="3.4" strokeLinecap="round" />
+                  <path d="M15 9 H49 V22 C49 33.5 41.8 41 32 41 C22.2 41 15 33.5 15 22 Z" fill="url(#cgGold)" />
+                  <path d="M21 13 H29 C29 24 25 30 22.5 31.5 C19.5 28 19.5 20 21 13 Z" fill="rgba(255,255,255,0.28)" />
+                  <rect x="28.5" y="41" width="7" height="8" fill="url(#cgGold)" />
+                  <path d="M21 49 H43 L45 55 H19 Z" fill="url(#cgGold)" />
+                  <rect x="17" y="55" width="30" height="4.5" rx="1.6" fill="url(#cgGold)" />
+                </svg>
               </span>
               <span className="cg__over">{t.game.over}</span>
               <div className="cg__bigscore">
@@ -494,7 +509,9 @@ export function CatchGame({ onClose }: { onClose: () => void }) {
                       {submitState === 'error' && <span className="cg__lberr">{t.game.lbError}</span>}
                     </>
                   ) : (
-                    <span className="cg__lbdone">✓ {t.game.submitted}</span>
+                    <span className="cg__lbdone">
+                      ✓ {rank !== null ? `${t.game.youAreRanked} #${rank} ${t.game.ofBoard}` : t.game.submitted}
+                    </span>
                   )}
                 </div>
               )}

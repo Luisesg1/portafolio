@@ -489,10 +489,23 @@
   touch-action: pan-y;
 }
 .cg__medal {
-  font-size: 44px;
-  line-height: 1;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.5));
+  line-height: 0;
   animation: cg-pop 0.4s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.cg__trophy {
+  width: 54px;
+  height: 54px;
+  display: block;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.45));
+}
+.cg__medal.is-record .cg__trophy {
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 18px rgba(255, 184, 60, 0.6));
+}
+/* not a personal best → keep the trophy but muted */
+.cg__medal:not(.is-record) .cg__trophy {
+  filter: grayscale(0.8) brightness(0.85);
+  opacity: 0.72;
 }
 .cg__medal.is-record {
   animation: cg-medal 1.2s ease-in-out infinite;
